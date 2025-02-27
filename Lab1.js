@@ -7,13 +7,9 @@ let fs = require('fs');
 let EventEmitter = require('events');
 
 function readJsonFromFile(fileName) {
-    // ***YOUR CODE HERE***
-  //
-  // Read from the specified file (using the fs module),
-  // pass the contents to JSON.parse, and return the
-  // resulting object.
+    let data = fs.readFileSync(fileName, 'utf8');
+    return JSON.parse(data);
 }
-
 class CurrencyConverter extends EventEmitter {
 
     static calculateRates(usdPrices) {
@@ -40,10 +36,7 @@ class CurrencyConverter extends EventEmitter {
                 if (from !== to) {
                     let tag = `${from}-${to}`;
                     // ***YOUR CODE HERE***
-                // set the rates for trading different cryptocurrencies directly,
-                // calculating the relative prices based off of their USD prices.
-                // For example, if `sym` is "BTC", calculate the values for
-                // "BTC-ETH", "ETH-BTC", "BTC-EOS", "EOS-BTC", etc.
+                    rates[tag] = usdMap[to] / usdMap[from];
                     
                 }
             }
@@ -80,8 +73,8 @@ class CurrencyConverter extends EventEmitter {
             // Update USD rates
             // complete the equality 
              // ***YOUR CODE HERE***
-            this.rates[`USD-${sym}`] = ;
-            this.rates[`${sym}-USD`] = ;
+            this.rates[`USD-${sym}`] = usdPrice
+            this.rates[`${sym}-USD`] = 1 / usdPrice
           
 
             // Recalculate all crypto-to-crypto rates
